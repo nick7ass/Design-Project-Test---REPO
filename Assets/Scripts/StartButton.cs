@@ -17,6 +17,8 @@ public class StartButton : MonoBehaviour
 
         gameManager = GameObject.Find("Game Manager").GetComponent<GameManager>();
 
+        button = GetComponent<Button>();
+
         button.onClick.AddListener(gameManager.StartGame);
         
     }
