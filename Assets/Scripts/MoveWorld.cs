@@ -5,17 +5,30 @@ using UnityEngine;
 public class MoveWorld : MonoBehaviour
 {
     private float speed = 15.0f;
+
+    private GameManager gameManager;
     // Start is called before the first frame update
     void Start()
     {
-        
+        gameManager = GameObject.Find("Game Manager").GetComponent<GameManager>();
+
     }
 
     // Update is called once per frame
     void Update()
     {
-        //lägg till if statement för att bedödma om gamet är startat typ en bool
-        //Moves both backgrounds (left and right) and Ground objects since they all have this script attached
-        transform.Translate(Vector3.back * Time.deltaTime * speed);
+        makeWorldMove();
+    }
+
+    void makeWorldMove()
+    {
+        //While isGameActive var in Game Manager is true this moves both
+        //backgrounds (left and right) and Ground objects since they
+        //all have this script attached
+
+        while (gameManager.isGameActive)
+        {
+            transform.Translate(Vector3.back * Time.deltaTime * speed);
+        }
     }
 }
