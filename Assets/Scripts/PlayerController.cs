@@ -43,6 +43,16 @@ public class PlayerController : MonoBehaviour
             transform.position = new Vector3(outOfRange, transform.position.y, transform.position.z);
         }
 
+
+
+
+
+
+
+
+
+
+
         //Make noise when pressing space
         //if (Input.GetKeyDown(KeyCode.Space) && !gameOver)
         //{
@@ -52,8 +62,8 @@ public class PlayerController : MonoBehaviour
     }
 
     //To make it so when the player collides with obstacle, game over
-    private void OnCollisionEnter(Collision collision)
-    {
+    //private void OnCollisionEnter(Collision collision)
+    //{
         //if (collision.gameObject.CompareTag("Ground"))
         //{
           //  isOnGround = true;
@@ -72,5 +82,5 @@ public class PlayerController : MonoBehaviour
         //    dirtParticle.Stop();
         //    playerAudio.PlayOneShot(crashSound, 1.0f);
         //}
-    }
+    //}
 }

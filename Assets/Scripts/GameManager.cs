@@ -34,6 +34,7 @@ public class GameManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        StartGame();
         //VET INTE OM JAG BEHÖVER DENNA ENS? ÄVEN OVAN
         //playerControllerScript = GameObject.Find("Player").GetComponent<PlayerController>();
     }
@@ -74,7 +75,7 @@ public class GameManager : MonoBehaviour
             
             yield return new WaitForSeconds(spawnRate);
             int index = Random.Range(0, obstacles.Count);
-            Instantiate(obstacles[index]);
+            Instantiate(obstacles[index], obstacles[index].transform.position, obstacles[index].transform.rotation);
         }
     }
 
