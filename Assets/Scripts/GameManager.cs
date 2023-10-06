@@ -46,8 +46,14 @@ public class GameManager : MonoBehaviour
 
     public void StartGame()
     {
+        //SPAWNRATE fixa så den ökar med tid? så länge gör jag såhär:
+        //!!!!!!!!!!!!!
+        spawnRate = 1.0f;
+
         //Starts function that starts the game
         isGameActive = true;
+
+        Debug.Log("I clicked on start");
 
         //Makes it so the start button and title text disappers when game starts
         titleScreen.SetActive(false);
@@ -65,9 +71,7 @@ public class GameManager : MonoBehaviour
         //why this works to make it stop spawning things when gameover
         while (isGameActive)
         {
-            //SPAWNRATE fixa så den ökar med tid? så länge gör jag såhär:
-            //!!!!!!!!!!!!!
-            spawnRate = 1.0f;
+            
             yield return new WaitForSeconds(spawnRate);
             int index = Random.Range(0, obstacles.Count);
             Instantiate(obstacles[index]);
