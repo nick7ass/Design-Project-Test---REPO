@@ -1611,6 +1611,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4dfdfeb667ea74c459ab7b7ebf1e9aa0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  speed: 15
 --- !u!65 &910261771
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -2123,6 +2124,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4dfdfeb667ea74c459ab7b7ebf1e9aa0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  speed: 15
 --- !u!65 &1436620878
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -2348,6 +2350,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4dfdfeb667ea74c459ab7b7ebf1e9aa0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  speed: 15
 --- !u!65 &1812971618
 BoxCollider:
   m_ObjectHideFlags: 0

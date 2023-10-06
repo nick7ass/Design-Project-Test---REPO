@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class MoveWorld : MonoBehaviour
 {
-    private float speed = 15.0f;
+
+    public float speed = 15.0f;
 
     private float outOfBound = 0;
 
@@ -23,7 +24,6 @@ public class MoveWorld : MonoBehaviour
         //While isGameActive var in Game Manager is true this moves both
         //backgrounds (left and right) and Ground objects since they
         //all have this script attached
-
         if (gameManager.isGameActive)
         {
             transform.Translate(Vector3.back * Time.deltaTime * speed);
@@ -34,6 +34,13 @@ public class MoveWorld : MonoBehaviour
         {
             Destroy(gameObject);
         }
+
+    }
+
+    public void UpdateDifficulty()
+    {
+        speed += 1;
+        //LÄGG TILL SÅ ATT TRÄDEN OCKSÅ RÖR SIG?????
     }
 
 }

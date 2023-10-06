@@ -20,6 +20,8 @@ public class GameManager : MonoBehaviour
     //Used to access the buttons and title in ui
     public GameObject titleScreen;
 
+    public MoveWorld moveWorldScript;
+
     //VET INTE OM JAG BEHÖVER DENNA ENS? ÄVEN I START
     //public PlayerController playerControllerScript;
 
@@ -38,6 +40,7 @@ public class GameManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        moveWorldScript = GameObject.Find("Environment").GetComponent<MoveWorld>();
 
         //spawnRate = 3.0f;
 
@@ -87,6 +90,8 @@ public class GameManager : MonoBehaviour
             int index = Random.Range(0, obstacles.Count);
             Instantiate(obstacles[index], obstacles[index].transform.position, obstacles[index].transform.rotation);
             UpdateScore(10);
+            spawnRate -= 0.1f;
+            moveWorldScript.UpdateDifficulty();
         }
     }
 
@@ -109,6 +114,8 @@ public class GameManager : MonoBehaviour
         //Displaying the score 
         scoreText.text = "Score: " + score;
     }
+
+    
 
     
     public void GameOver()
