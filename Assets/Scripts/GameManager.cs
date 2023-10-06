@@ -86,6 +86,7 @@ public class GameManager : MonoBehaviour
             yield return new WaitForSeconds(spawnRate);
             int index = Random.Range(0, obstacles.Count);
             Instantiate(obstacles[index], obstacles[index].transform.position, obstacles[index].transform.rotation);
+            UpdateScore(10);
         }
     }
 
@@ -109,22 +110,22 @@ public class GameManager : MonoBehaviour
         scoreText.text = "Score: " + score;
     }
 
-    //Behövs inte än
-    //public void GameOver()
-    //{
-    //    restartButton.gameObject.SetActive(true);
-    //    //make game over text appear:
-    //    gameOverText.gameObject.SetActive(true);
-    //    //Used to maked diff functions etc not work.
-    //    isGameActive = false;
+    
+    public void GameOver()
+    {
+        restartButton.gameObject.SetActive(true);
+        //make game over text appear:
+        gameOverText.gameObject.SetActive(true);
+        //Used to maked diff functions etc not work.
+        isGameActive = false;
 
-    //}
+    }
 
-    ////function to restart the game (used by gameober button restart game
-    //public void RestartGame()
-    //{
-    //    //Den första delen är the actual code o sen i parantes e liksom name of scene,
-    //    //så där kan man skriva scen-namnet. This takes the current scenes name and loads.
-    //    SceneManager.LoadScene(SceneManager.GetActiveScene().name);
-    //}
+    //function to restart the game (used by gameober button restart game
+    public void RestartGame()
+    {
+        //Den första delen är the actual code o sen i parantes e liksom name of scene,
+        //så där kan man skriva scen-namnet. This takes the current scenes name and loads.
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+    }
 }

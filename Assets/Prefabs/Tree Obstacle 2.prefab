@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 898505554636824242}
   - component: {fileID: 898505554635765220}
   - component: {fileID: 898505554626202268}
+  - component: {fileID: -770905948613486099}
   m_Layer: 0
   m_Name: Tree Obstacle 2
   m_TagString: Obstacle
@@ -109,3 +110,15 @@ CapsuleCollider:
   m_Height: 8.61388
   m_Direction: 1
   m_Center: {x: -0.01, y: 3.76, z: -0.06}
+--- !u!114 &-770905948613486099
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 898505554637761306}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4dfdfeb667ea74c459ab7b7ebf1e9aa0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

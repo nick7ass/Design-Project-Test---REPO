@@ -62,25 +62,25 @@ public class PlayerController : MonoBehaviour
     }
 
     //To make it so when the player collides with obstacle, game over
-    //private void OnCollisionEnter(Collision collision)
-    //{
+    private void OnCollisionEnter(Collision collision)
+    {
         //if (collision.gameObject.CompareTag("Ground"))
         //{
-          //  isOnGround = true;
-            //dirtParticle.Play();
+        //    isOnGround = true;
+        //    dirtParticle.Play();
 
         //}
         //else
-        //if (collision.gameObject.CompareTag("Obstacle"))
-        //{
-        //    Debug.Log("Game over!");
-        //    gameOver = true;
-        //    //Death animation, first is to trigger it (set it to true) and then which death animation
-        //    playerAnim.SetBool("Death_b", true);
-        //    playerAnim.SetInteger("DeathType_int", 1);
-        //    explosionParticle.Play();
-        //    dirtParticle.Stop();
-        //    playerAudio.PlayOneShot(crashSound, 1.0f);
-        //}
-    //}
+        if (collision.gameObject.CompareTag("Obstacle"))
+        {
+            Debug.Log("Game over!");
+            gameManagerScript.GameOver();
+            //Death animation, first is to trigger it (set it to true) and then which death animation
+            //playerAnim.SetBool("Death_b", true);
+            //playerAnim.SetInteger("DeathType_int", 1);
+            //explosionParticle.Play();
+            //dirtParticle.Stop();
+            //playerAudio.PlayOneShot(crashSound, 1.0f);
+        }
+    }
 }

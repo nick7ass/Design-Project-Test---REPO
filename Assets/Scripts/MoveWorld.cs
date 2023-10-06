@@ -6,6 +6,8 @@ public class MoveWorld : MonoBehaviour
 {
     private float speed = 15.0f;
 
+    private float outOfBound = 0;
+
     private GameManager gameManager;
 
     // Start is called before the first frame update
@@ -18,18 +20,20 @@ public class MoveWorld : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //makeWorldMove();
-    }
-
-    void makeWorldMove()
-    {
         //While isGameActive var in Game Manager is true this moves both
         //backgrounds (left and right) and Ground objects since they
         //all have this script attached
 
-        while (gameManager.isGameActive)
+        if (gameManager.isGameActive)
         {
             transform.Translate(Vector3.back * Time.deltaTime * speed);
         }
+
+        //Destroys obstacles that is out of screen
+        if (transform.position.z < outOfBound && gameObject.CompareTag("Obstacle"))
+        {
+            Destroy(gameObject);
+        }
     }
+
 }
