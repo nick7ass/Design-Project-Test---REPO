@@ -15,12 +15,19 @@ public class StartButton : MonoBehaviour
         //The AddListener makes it so it listens to possible input ig? typ gör så att den funkar alltså
         //man typ listening for the function (därav inga paranteser)
 
-        gameManager = GameObject.Find("Game Manager").GetComponent<GameManager>();
-
         button = GetComponent<Button>();
 
-        button.onClick.AddListener(gameManager.StartGame);
+        gameManager = GameObject.Find("Game Manager").GetComponent<GameManager>();
+
+
+        button.onClick.AddListener(makeGameStart);
         
+    }
+
+    private void makeGameStart()
+    {
+        gameManager.StartGame();
+        Debug.Log("Start Button was clicked");
     }
 
     // Update is called once per frame

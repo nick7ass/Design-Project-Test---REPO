@@ -7,6 +7,7 @@ public class MoveWorld : MonoBehaviour
     private float speed = 15.0f;
 
     private GameManager gameManager;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -17,7 +18,7 @@ public class MoveWorld : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        makeWorldMove();
+        //makeWorldMove();
     }
 
     void makeWorldMove()
