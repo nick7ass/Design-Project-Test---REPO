@@ -4,19 +4,20 @@ using UnityEngine;
 
 public class SpawnManager : MonoBehaviour
 {
-    public List<GameObject> obstacleTrees;
+    public GameObject butcher;
     //public Vector3 spawnPos;
-    public float startDelay = 2.0f;
-    public float repeatRate = 2.0f;
-    private float spawnPosZ = 170;
-    private float spawnPosRangeX = 20;
-    private GameManager gameManager;
+    public float startDelay = 1.0f;
+    public float repeatRate = 5.0f;
+    private float spawnPosZ = 125;
+    private float spawnPosY = 0.0f;
+    private float spawnPosRangeX = 20.0f;
+    private GameManager gameManagerScript;
 
 
-    public void StartSpawningTrees()
+    public void StartSpawningButchers()
     {
-        gameManager = GameObject.Find("Game Manager").GetComponent<GameManager>();
-        InvokeRepeating("SpawnTreeObstacle", startDelay, repeatRate);
+        gameManagerScript = GameObject.Find("Game Manager").GetComponent<GameManager>();
+        InvokeRepeating("SpawnButcher", startDelay, repeatRate);
     }
 
     // Update is called once per frame
@@ -25,18 +26,18 @@ public class SpawnManager : MonoBehaviour
         
     }
 
-    private void SpawnTreeObstacle()
+    private void SpawnButcher()
     {
-        if (gameManager.isGameActive == true)
+        if (gameManagerScript.isGameActive)
         {
-            int index = Random.Range(0, obstacleTrees.Count);
-            Instantiate(obstacleTrees[index], getRandomSpawnPos(), obstacleTrees[index].transform.rotation);
+            Instantiate(butcher, getRandomSpawnPos(), butcher.transform.rotation);
+            
         }
     }
 
-    public Vector3 getRandomSpawnPos()
+    private Vector3 getRandomSpawnPos()
     {
-        Vector3 spawnPos = new Vector3(Random.Range(-spawnPosRangeX, spawnPosRangeX), 0, spawnPosZ);
+        Vector3 spawnPos = new Vector3(Random.Range(-spawnPosRangeX, spawnPosRangeX), spawnPosY, spawnPosZ);
         return spawnPos;
     }
 

@@ -1,0 +1,32 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class MoveObstacles : MonoBehaviour
+{
+    private GameManager gameManagerScript;
+
+    public float obstacleSpeed;
+    private Rigidbody obstacleRigidbody;
+
+    // Start is called before the first frame update
+    void Start()
+    {
+        obstacleSpeed = 3.0f;
+
+        gameManagerScript = GameObject.Find("Game Manager").GetComponent<GameManager>();
+
+        obstacleRigidbody = GetComponent<Rigidbody>();
+       
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+        if (gameManagerScript.isGameActive)
+        {
+            Vector3 obstacleDirection = new Vector3(Random.Range(-3,3), 0, -20).normalized;
+            obstacleRigidbody.AddForce(obstacleDirection * obstacleSpeed, ForceMode.Impulse);
+        }
+    }
+}

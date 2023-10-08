@@ -30,12 +30,12 @@ public class GameManager : MonoBehaviour
     //Var for storing the score
     private int score;
 
-    //VAR för test av invoke repeating ist (ta bort spawnRate om dednna används
-    //public float startDelay = 2.0f;
-    //public float repeatRate = 2.0f;
-
     //Var for spawnRate
     private float spawnRate = 3.0f;
+
+    private float spawnPosZ = 125.0f;
+    private float spawnPosY  = 5.0f;
+    private float spawnPosRangeX = 20.0f;
 
     public bool isGameActive;
 
@@ -44,12 +44,6 @@ public class GameManager : MonoBehaviour
     {
         moveWorldScript = GameObject.Find("Environment").GetComponent<MoveWorld>();
         spawnManagerScript = GameObject.Find("Spawn Manager").GetComponent<SpawnManager>();
-
-        //spawnRate = 3.0f;
-
-        //StartGame();
-        //VET INTE OM JAG BEHÖVER DENNA ENS? ÄVEN OVAN
-        //playerControllerScript = GameObject.Find("Player").GetComponent<PlayerController>();
     }
 
     // Update is called once per frame
@@ -60,11 +54,7 @@ public class GameManager : MonoBehaviour
 
     public void StartGame()
     {
-        //SPAWNRATE fixa så den ökar med tid? så länge gör jag såhär:
-        //!!!!!!!!!!!!!
-        
-
-        //Starts function that starts the game
+        //Variable to control if game is active
         isGameActive = true;
 
         Debug.Log("I clicked on start");
@@ -72,20 +62,20 @@ public class GameManager : MonoBehaviour
         //Makes it so the start button and title text disappers when game starts
         titleScreen.SetActive(false);
 
-        //LÄGGER den här så länge för test
-        //UpdateScore(10);
-
-        spawnManagerScript.StartSpawningTrees();
-
-        StartCoroutine(SpawnTarget());
-
         score = 0;
 
-        //Testar denna istället för StartCoroutine
-        //InvokeRepeating("SpawnObstacle", startDelay, repeatRate);
+        //Starts the spawn of butchers
+        spawnManagerScript.StartSpawningButchers();
+
+        //Starts spawning obstacles
+        StartCoroutine(SpawnObstacles());
+
+        //Updates and displays score
+        StartCoroutine(UpdateScore());
+
     }
 
-    IEnumerator SpawnTarget()
+    IEnumerator SpawnObstacles()
     {
         //The isGameActive variable we define as true in start, but false in Game over function, which is
         //why this works to make it stop spawning things when gameover
@@ -93,46 +83,45 @@ public class GameManager : MonoBehaviour
         {
             yield return new WaitForSeconds(spawnRate);
             int index = Random.Range(0, obstacles.Count);
-            Vector3 spawnPos = spawnManagerScript.getRandomSpawnPos();
-            Instantiate(obstacles[index], spawnPos, obstacles[index].transform.rotation);
-            UpdateScore(10);
+            Instantiate(obstacles[index], getRandomSpawnPosition(), obstacles[index].transform.rotation);
             UpdateSpawnRate();
-            moveWorldScript.speed += 0.3f;
-            //.UpdateDifficulty();
+            moveWorldScript.speed += 0.2f;
+            
         }
     }
 
-
-    //private void SpawnObstacle()
-    //{
-    //    if (isGameActive)
-    //    {
-    //        int index = Random.Range(0, obstacles.Count);
-    //        Instantiate(obstacles[index], obstacles[index].transform.position, obstacles[index].transform.rotation);
-    //        score += 10;
-    //    }
-    //}
-
-    //Method to update and show the score. Public to be able to reach it from "Target" script
-    public void UpdateScore(int scoreToAdd)
+    //Method to update and show the score.
+    IEnumerator UpdateScore()
     {
-        score += scoreToAdd;
+        while (isGameActive)
+        {
+            yield return new WaitForSeconds(1);
+            //Adds 10 to score
+            score += 10;
 
-        //Displaying the score 
-        scoreText.text = "Score: " + score;
+            //Displaying the score 
+            scoreText.text = "Score: " + score;
+        }
     }
 
     void UpdateSpawnRate()
     {
-        if (spawnRate>1)
+        if (spawnRate>1.0f)
         {
-            spawnRate -= 0.1f;
+            spawnRate -= 0.2f;
         }
     }
 
-    
+    private Vector3 getRandomSpawnPosition()
+    {
+        //Getting random numbers for spawn position in X
+        float spawnPosX = Random.Range(-spawnPosRangeX, spawnPosRangeX);
 
-    
+        //Variable to clean up in instantiate
+        Vector3 randomPos = new Vector3(spawnPosX, spawnPosY, spawnPosZ);
+        return randomPos;
+    }
+
     public void GameOver()
     {
         restartButton.gameObject.SetActive(true);

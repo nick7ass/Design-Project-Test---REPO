@@ -4,43 +4,46 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-    //To control if game is over or not (for relevant functions to be stopped/started)
-    //public bool gameOver = true;
 
-    //to be used for horizontal input of arrowkeys
+    //Used for control of horizontal input of arrowkeys
     private float horizontalInput;
+
+    //Controls speed of player
     public float playerSpeed;
 
-    private float outOfRange = 19;
+    //Variable used to decide range in the X axis, used to make sure player dont go out of bounds
+    private float outOfRangeX = 19;
 
+    //gets the Game manager script to a access the isGameActive variable
     private GameManager gameManagerScript;
 
     // Start is called before the first frame update
     void Start()
     {
-        //Gets access to Game Manager script to access the isGameActive Variable
+        //Getting the game manager script from gameobject Game Manager
         gameManagerScript = GameObject.Find("Game Manager").GetComponent<GameManager>();
-
     }
 
     // Update is called once per frame
     void Update()
     {
+        //As long as the isGameActive is true, gets horizontal input
         if (gameManagerScript.isGameActive)
         {
             horizontalInput = Input.GetAxis("Horizontal");
             transform.Translate(Vector3.right * horizontalInput * Time.deltaTime * playerSpeed);
         }
+
         //Hinders player to move out of bounds.
-        //First if is for left boundary and the second one is for right.
-        if (transform.position.x < -outOfRange)
+        //First if-statement is for left boundary and the second one is for right.
+        if (transform.position.x < -outOfRangeX)
         {
-            transform.position = new Vector3(-outOfRange, transform.position.y, transform.position.z);
+            transform.position = new Vector3(-outOfRangeX, transform.position.y, transform.position.z);
         }
 
-        if (transform.position.x > outOfRange)
+        if (transform.position.x > outOfRangeX)
         {
-            transform.position = new Vector3(outOfRange, transform.position.y, transform.position.z);
+            transform.position = new Vector3(outOfRangeX, transform.position.y, transform.position.z);
         }
 
 

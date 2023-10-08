@@ -5,7 +5,7 @@ using UnityEngine;
 public class MoveWorld : MonoBehaviour
 {
 
-    public float speed = 15.0f;
+    public float speed;
 
     private float outOfBound = 0;
 
@@ -15,7 +15,7 @@ public class MoveWorld : MonoBehaviour
     void Start()
     {
         gameManager = GameObject.Find("Game Manager").GetComponent<GameManager>();
-
+        speed = 15.0f;
     }
 
     // Update is called once per frame
@@ -34,13 +34,5 @@ public class MoveWorld : MonoBehaviour
         {
             Destroy(gameObject);
         }
-
     }
-
-    //public void UpdateDifficulty()
-    //{
-        
-    //    //LÄGG TILL SÅ ATT TRÄDEN OCKSÅ RÖR SIG?????
-    //}
-
 }
