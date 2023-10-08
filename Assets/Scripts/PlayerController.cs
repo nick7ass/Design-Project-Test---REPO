@@ -9,7 +9,7 @@ public class PlayerController : MonoBehaviour
 
     //to be used for horizontal input of arrowkeys
     private float horizontalInput;
-    public float speed;
+    public float playerSpeed;
 
     private float outOfRange = 19;
 
@@ -29,7 +29,7 @@ public class PlayerController : MonoBehaviour
         if (gameManagerScript.isGameActive)
         {
             horizontalInput = Input.GetAxis("Horizontal");
-            transform.Translate(Vector3.right * horizontalInput * Time.deltaTime * speed);
+            transform.Translate(Vector3.right * horizontalInput * Time.deltaTime * playerSpeed);
         }
         //Hinders player to move out of bounds.
         //First if is for left boundary and the second one is for right.

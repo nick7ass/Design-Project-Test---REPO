@@ -22,6 +22,8 @@ public class GameManager : MonoBehaviour
 
     public MoveWorld moveWorldScript;
 
+    public SpawnManager spawnManagerScript;
+
     //VET INTE OM JAG BEHÖVER DENNA ENS? ÄVEN I START
     //public PlayerController playerControllerScript;
 
@@ -41,6 +43,7 @@ public class GameManager : MonoBehaviour
     void Start()
     {
         moveWorldScript = GameObject.Find("Environment").GetComponent<MoveWorld>();
+        spawnManagerScript = GameObject.Find("Spawn Manager").GetComponent<SpawnManager>();
 
         //spawnRate = 3.0f;
 
@@ -72,6 +75,8 @@ public class GameManager : MonoBehaviour
         //LÄGGER den här så länge för test
         //UpdateScore(10);
 
+        spawnManagerScript.StartSpawningTrees();
+
         StartCoroutine(SpawnTarget());
 
         score = 0;
@@ -88,10 +93,12 @@ public class GameManager : MonoBehaviour
         {
             yield return new WaitForSeconds(spawnRate);
             int index = Random.Range(0, obstacles.Count);
-            Instantiate(obstacles[index], obstacles[index].transform.position, obstacles[index].transform.rotation);
+            Vector3 spawnPos = spawnManagerScript.getRandomSpawnPos();
+            Instantiate(obstacles[index], spawnPos, obstacles[index].transform.rotation);
             UpdateScore(10);
-            spawnRate -= 0.1f;
-            moveWorldScript.UpdateDifficulty();
+            UpdateSpawnRate();
+            moveWorldScript.speed += 0.3f;
+            //.UpdateDifficulty();
         }
     }
 
@@ -113,6 +120,14 @@ public class GameManager : MonoBehaviour
 
         //Displaying the score 
         scoreText.text = "Score: " + score;
+    }
+
+    void UpdateSpawnRate()
+    {
+        if (spawnRate>1)
+        {
+            spawnRate -= 0.1f;
+        }
     }
 
     

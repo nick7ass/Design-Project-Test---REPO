@@ -37,10 +37,10 @@ public class MoveWorld : MonoBehaviour
 
     }
 
-    public void UpdateDifficulty()
-    {
-        speed += 1;
-        //LÄGG TILL SÅ ATT TRÄDEN OCKSÅ RÖR SIG?????
-    }
+    //public void UpdateDifficulty()
+    //{
+        
+    //    //LÄGG TILL SÅ ATT TRÄDEN OCKSÅ RÖR SIG?????
+    //}
 
 }
