@@ -7,8 +7,7 @@ using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
-    //Declare/create list. Similar to an array but not quite the same.
-    //HÄR FÖR OBSTACLES
+    //Declare/create list to place obstacle prefabs in for use in game.
     public List<GameObject> obstacles;
 
     //Var for score / Game over text (aka UI text to be or appear on screen.
@@ -20,9 +19,9 @@ public class GameManager : MonoBehaviour
     //Used to access the buttons and title in ui
     public GameObject titleScreen;
 
-    public MoveWorld moveWorldScript;
+    private MoveWorld moveWorldScript;
 
-    public SpawnManager spawnManagerScript;
+    private SpawnManager spawnManagerScript;
 
     //Var for storing the score
     private int score;
@@ -66,10 +65,10 @@ public class GameManager : MonoBehaviour
 
     }
 
+    //Function that makes it so that obstacles are spawned while isGameActive variable is true.
+    //Game over (collision with obstacle) would therefor make this loop stop
     IEnumerator SpawnObstacles()
     {
-        //The isGameActive variable we define as true in start, but false in Game over function, which is
-        //why this works to make it stop spawning things when gameover
         while (isGameActive)
         {
             yield return new WaitForSeconds(spawnRate);
@@ -77,11 +76,14 @@ public class GameManager : MonoBehaviour
             Instantiate(obstacles[index], getRandomSpawnPosition(), obstacles[index].transform.rotation);
             UpdateSpawnRate();
             moveWorldScript.speed += 0.2f;
-            
+            if (score>300)
+            {
+                Instantiate(obstacles[index], getRandomSpawnPosition(), obstacles[index].transform.rotation);
+            }
         }
     }
 
-    //Method to update and show the score.
+    //Method to update and show the score, updating for as long as the isGameActive variable is true.
     IEnumerator UpdateScore()
     {
         while (isGameActive)
@@ -95,14 +97,16 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    //Increases the difficulty over time by adjusting the spawnrate of obstacles 
     void UpdateSpawnRate()
     {
         if (spawnRate>1.0f)
         {
-            spawnRate -= 0.2f;
+            spawnRate -= 0.1f;
         }
     }
 
+    //Used to get a random spawn position for obstacle
     private Vector3 getRandomSpawnPosition()
     {
         //Getting random numbers for spawn position in X
@@ -113,6 +117,7 @@ public class GameManager : MonoBehaviour
         return randomPos;
     }
 
+    //Triggered by player colliding with an obstacle.
     public void GameOver()
     {
         //make try again button appear:
@@ -124,7 +129,7 @@ public class GameManager : MonoBehaviour
 
     }
 
-    //function to restart the game (used by gameober button restart game
+    //function to restart the game (used by clicking on the gameover button restart game)
     public void RestartGame()
     {
         //Den första delen är the actual code o sen i parantes e liksom name of scene,

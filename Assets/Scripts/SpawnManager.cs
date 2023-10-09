@@ -20,18 +20,11 @@ public class SpawnManager : MonoBehaviour
         InvokeRepeating("SpawnButcher", startDelay, repeatRate);
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
     private void SpawnButcher()
     {
         if (gameManagerScript.isGameActive)
         {
             Instantiate(butcher, getRandomSpawnPos(), butcher.transform.rotation);
-            
         }
     }
 

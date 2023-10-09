@@ -9,12 +9,12 @@ public class MoveWorld : MonoBehaviour
 
     private float outOfBound = 0;
 
-    private GameManager gameManager;
+    public GameManager gameManager;
 
     // Start is called before the first frame update
     void Start()
     {
-        gameManager = GameObject.Find("Game Manager").GetComponent<GameManager>();
+        gameManager = gameManager.GetComponent<GameManager>();
         speed = 15.0f;
     }
 

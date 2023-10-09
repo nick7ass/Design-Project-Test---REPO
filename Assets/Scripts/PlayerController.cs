@@ -34,7 +34,7 @@ public class PlayerController : MonoBehaviour
             transform.Translate(Vector3.right * horizontalInput * Time.deltaTime * playerSpeed);
         }
 
-        //Hinders player to move out of bounds.
+        //Stops the player from moving out of bounds.
         //First if-statement is for left boundary and the second one is for right.
         if (transform.position.x < -outOfRangeX)
         {
@@ -49,15 +49,8 @@ public class PlayerController : MonoBehaviour
 
 
 
-
-
-
-
-
-
-
         //Make noise when pressing space
-        //if (Input.GetKeyDown(KeyCode.Space) && !gameOver)
+        //if (Input.GetKeyDown(KeyCode.Space) && !isGameActive)
         //{
         //Ist för denna så använd ljud
         //Instantiate(cookiePrefab, transform.position, transform.rotation);

@@ -28,5 +28,10 @@ public class MoveObstacles : MonoBehaviour
             Vector3 obstacleDirection = new Vector3(Random.Range(-3,3), 0, -20).normalized;
             obstacleRigidbody.AddForce(obstacleDirection * obstacleSpeed, ForceMode.Impulse);
         }
+
+        if (obstacleRigidbody.position.z < 2)
+        {
+            Destroy(gameObject);
+        }
     }
 }
