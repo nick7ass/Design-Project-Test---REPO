@@ -1653,8 +1653,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   butcher: {fileID: 5896292350250281587, guid: ec9bc5a43c7f84e0bbda77dd1067362e, type: 3}
-  startDelay: 2
-  repeatRate: 2
+  startDelay: 15
+  repeatRate: 6
 --- !u!4 &965840037
 Transform:
   m_ObjectHideFlags: 0

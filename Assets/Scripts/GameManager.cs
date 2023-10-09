@@ -24,9 +24,6 @@ public class GameManager : MonoBehaviour
 
     public SpawnManager spawnManagerScript;
 
-    //VET INTE OM JAG BEHÖVER DENNA ENS? ÄVEN I START
-    //public PlayerController playerControllerScript;
-
     //Var for storing the score
     private int score;
 
@@ -44,12 +41,6 @@ public class GameManager : MonoBehaviour
     {
         moveWorldScript = GameObject.Find("Environment").GetComponent<MoveWorld>();
         spawnManagerScript = GameObject.Find("Spawn Manager").GetComponent<SpawnManager>();
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 
     public void StartGame()
@@ -124,6 +115,7 @@ public class GameManager : MonoBehaviour
 
     public void GameOver()
     {
+        //make try again button appear:
         restartButton.gameObject.SetActive(true);
         //make game over text appear:
         gameOverText.gameObject.SetActive(true);

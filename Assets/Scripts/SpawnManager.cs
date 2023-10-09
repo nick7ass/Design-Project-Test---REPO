@@ -6,8 +6,8 @@ public class SpawnManager : MonoBehaviour
 {
     public GameObject butcher;
     //public Vector3 spawnPos;
-    public float startDelay = 1.0f;
-    public float repeatRate = 5.0f;
+    public float startDelay;
+    public float repeatRate;
     private float spawnPosZ = 125;
     private float spawnPosY = 0.0f;
     private float spawnPosRangeX = 20.0f;

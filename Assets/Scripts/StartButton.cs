@@ -12,29 +12,13 @@ public class StartButton : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        //The AddListener makes it so it listens to possible input ig? typ gör så att den funkar alltså
-        //man typ listening for the function (därav inga paranteser)
-
         button = GetComponent<Button>();
 
         gameManager = GameObject.Find("Game Manager").GetComponent<GameManager>();
 
-
+        //Starts game by calling the StartGame method in Game Manager
         button.onClick.AddListener(gameManager.StartGame);
-            //makeGameStart);
-        
-    }
-
-    //private void makeGameStart()
-    //{
-    //    gameManager.StartGame();
-    //    Debug.Log("Start Button was clicked");
-    //}
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+          
     }
 
 }
