@@ -12,7 +12,7 @@ public class MoveObstacles : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        obstacleSpeed = 3.0f;
+        obstacleSpeed = 8.0f;
 
         gameManagerScript = GameObject.Find("Game Manager").GetComponent<GameManager>();
 

@@ -6,14 +6,14 @@ public class MoveButchers : MonoBehaviour
 {
     private GameManager gameManagerScript;
 
-    public float butcherSpeed;
+    private float butcherSpeed;
     private Rigidbody butcherRigidbody;
     private GameObject player;
 
     // Start is called before the first frame update
     void Start()
     {
-        butcherSpeed = 5.0f;
+        butcherSpeed = 10.0f;
 
         gameManagerScript = GameObject.Find("Game Manager").GetComponent<GameManager>();
 
