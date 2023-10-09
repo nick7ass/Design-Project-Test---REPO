@@ -2564,6 +2564,7 @@ MonoBehaviour:
   gameOverText: {fileID: 497781171}
   restartButton: {fileID: 398866844}
   titleScreen: {fileID: 1117478357}
+  spawnManagerScript: {fileID: 965840036}
   isGameActive: 0
 --- !u!4 &1972370695
 Transform:

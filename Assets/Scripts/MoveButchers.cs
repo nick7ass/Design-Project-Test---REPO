@@ -6,9 +6,13 @@ public class MoveButchers : MonoBehaviour
 {
     private GameManager gameManagerScript;
 
-    private float butcherSpeed;
+    public float butcherSpeed;
     private Rigidbody butcherRigidbody;
     private GameObject player;
+
+    //Variables used for InvokeRepeating call to increase difficulty as game goes on
+    private float repeatDelay = 5.0f;
+    private float repeatRate = 5.0f;
 
     // Start is called before the first frame update
     void Start()
@@ -19,6 +23,9 @@ public class MoveButchers : MonoBehaviour
 
         butcherRigidbody = GetComponent<Rigidbody>();
         player = GameObject.Find("Player");
+
+        //Starts function after delay and then repeat in accordance to repeatrate
+        InvokeRepeating("IncreaseDifficulty", repeatDelay, repeatRate);
     }
 
     // Update is called once per frame
@@ -35,4 +42,12 @@ public class MoveButchers : MonoBehaviour
             Destroy(gameObject);
         }
     }
+
+    //!!!!!!Här kanske du kan lägga in om du ville testa något med typ att det ska komma några knivar eller så?
+    //Isåfall kanske en for loop med typ 5 repeats som då skickar ut 5 knivar eller något sånt?
+    private void IncreaseDifficulty()
+    {
+        butcherSpeed += 1.0f;
+    }
+
 }

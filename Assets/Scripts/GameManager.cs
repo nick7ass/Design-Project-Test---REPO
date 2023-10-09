@@ -21,7 +21,7 @@ public class GameManager : MonoBehaviour
 
     private MoveWorld moveWorldScript;
 
-    private SpawnManager spawnManagerScript;
+    public SpawnManager spawnManagerScript;
 
     //Var for storing the score
     private int score;
@@ -33,13 +33,16 @@ public class GameManager : MonoBehaviour
     private float spawnPosY  = 5.0f;
     private float spawnPosRangeX = 20.0f;
 
+    private float startDelay = 10.0f;
+    private float repeatRate = 10.0f;
+
     public bool isGameActive;
 
     // Start is called before the first frame update
     void Start()
     {
         moveWorldScript = GameObject.Find("Environment").GetComponent<MoveWorld>();
-        spawnManagerScript = GameObject.Find("Spawn Manager").GetComponent<SpawnManager>();
+        spawnManagerScript = spawnManagerScript.GetComponent<SpawnManager>();
     }
 
     public void StartGame()
@@ -63,6 +66,9 @@ public class GameManager : MonoBehaviour
         //Updates and displays score
         StartCoroutine(UpdateScore());
 
+        //Triggers a function that increase the difficulty of the game at a certain rate
+        InvokeRepeating("IncreaseDifficulty", startDelay, repeatRate);
+
     }
 
     //Function that makes it so that obstacles are spawned while isGameActive variable is true.
@@ -75,8 +81,10 @@ public class GameManager : MonoBehaviour
             int index = Random.Range(0, obstacles.Count);
             Instantiate(obstacles[index], getRandomSpawnPosition(), obstacles[index].transform.rotation);
             UpdateSpawnRate();
-            moveWorldScript.speed += 0.2f;
-            if (score>300)
+            //Ska testa ta bort denna och ist göra en func som ändrar alla svårigheter var 10 sec?
+            moveWorldScript.speed += 0.5f;
+
+            if (score>500)
             {
                 Instantiate(obstacles[index], getRandomSpawnPosition(), obstacles[index].transform.rotation);
             }
@@ -105,6 +113,7 @@ public class GameManager : MonoBehaviour
             spawnRate -= 0.1f;
         }
     }
+    
 
     //Used to get a random spawn position for obstacle
     private Vector3 getRandomSpawnPosition()
