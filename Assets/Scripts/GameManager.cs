@@ -33,8 +33,11 @@ public class GameManager : MonoBehaviour
     private float spawnPosY  = 5.0f;
     private float spawnPosRangeX = 20.0f;
 
-    private float startDelay = 10.0f;
-    private float repeatRate = 10.0f;
+    //Variables used for InvokeRepeating call to increase difficulty as game goes on
+    //and variable to hold the speed to be increased
+    private float repeatDelay = 3.0f;
+    private float repeatRate = 3.0f;
+    public float obstacleSpeed;
 
     public bool isGameActive;
 
@@ -43,6 +46,9 @@ public class GameManager : MonoBehaviour
     {
         moveWorldScript = GameObject.Find("Environment").GetComponent<MoveWorld>();
         spawnManagerScript = spawnManagerScript.GetComponent<SpawnManager>();
+
+        //Controls speed of obstacles (Both butchers and boulders etc, plus the world in move world script.
+        obstacleSpeed = 8.0f;
     }
 
     public void StartGame()
@@ -57,6 +63,7 @@ public class GameManager : MonoBehaviour
 
         score = 0;
 
+
         //Starts the spawn of butchers
         spawnManagerScript.StartSpawningButchers();
 
@@ -66,8 +73,8 @@ public class GameManager : MonoBehaviour
         //Updates and displays score
         StartCoroutine(UpdateScore());
 
-        //Triggers a function that increase the difficulty of the game at a certain rate
-        InvokeRepeating("IncreaseDifficulty", startDelay, repeatRate);
+        //Starts function after delay and then repeat in accordance to repeatrate
+        InvokeRepeating("IncreaseDifficulty", repeatDelay, repeatRate);
 
     }
 
@@ -82,9 +89,13 @@ public class GameManager : MonoBehaviour
             Instantiate(obstacles[index], getRandomSpawnPosition(), obstacles[index].transform.rotation);
             UpdateSpawnRate();
             //Ska testa ta bort denna och ist göra en func som ändrar alla svårigheter var 10 sec?
-            moveWorldScript.speed += 0.5f;
+            //moveWorldScript.speed += 0.5f;
 
-            if (score>500)
+            if (score>300)
+            {
+                Instantiate(obstacles[index], getRandomSpawnPosition(), obstacles[index].transform.rotation);
+            }
+            if (score > 800)
             {
                 Instantiate(obstacles[index], getRandomSpawnPosition(), obstacles[index].transform.rotation);
             }
@@ -113,7 +124,13 @@ public class GameManager : MonoBehaviour
             spawnRate -= 0.1f;
         }
     }
-    
+
+    //Increases the speed of obstacles on a repeat with selected delay and repeatrate from InvokeRepeating in StartGame
+    private void IncreaseDifficulty()
+    {
+        obstacleSpeed += 1.0f;
+    }
+
 
     //Used to get a random spawn position for obstacle
     private Vector3 getRandomSpawnPosition()

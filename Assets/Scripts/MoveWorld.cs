@@ -4,18 +4,17 @@ using UnityEngine;
 
 public class MoveWorld : MonoBehaviour
 {
-
-    public float speed;
+    private float speed;
 
     private float outOfBound = 0;
 
-    public GameManager gameManager;
+    public GameManager gameManagerScript;
 
     // Start is called before the first frame update
     void Start()
     {
-        gameManager = gameManager.GetComponent<GameManager>();
-        speed = 15.0f;
+        gameManagerScript = gameManagerScript.GetComponent<GameManager>();
+        
     }
 
     // Update is called once per frame
@@ -24,8 +23,9 @@ public class MoveWorld : MonoBehaviour
         //While isGameActive var in Game Manager is true this moves both
         //backgrounds (left and right) and Ground objects since they
         //all have this script attached
-        if (gameManager.isGameActive)
+        if (gameManagerScript.isGameActive)
         {
+            speed = gameManagerScript.obstacleSpeed;
             transform.Translate(Vector3.back * Time.deltaTime * speed);
         }
 

@@ -6,24 +6,22 @@ public class MoveObstacles : MonoBehaviour
 {
     private GameManager gameManagerScript;
 
-    public float obstacleSpeed;
+    private float obstacleSpeed;
+    
     private Rigidbody obstacleRigidbody;
 
-    //Variables used for InvokeRepeating call to increase difficulty as game goes on
-    private float repeatDelay = 5.0f;
-    private float repeatRate = 5.0f;
+    
 
     // Start is called before the first frame update
     void Start()
     {
-        obstacleSpeed = 8.0f;
-
         gameManagerScript = GameObject.Find("Game Manager").GetComponent<GameManager>();
+
+        obstacleSpeed = gameManagerScript.obstacleSpeed;
 
         obstacleRigidbody = GetComponent<Rigidbody>();
 
-        //Starts function after delay and then repeat in accordance to repeatrate
-        InvokeRepeating("IncreaseDifficulty", repeatDelay, repeatRate);
+        
        
     }
 
@@ -42,8 +40,4 @@ public class MoveObstacles : MonoBehaviour
         }
     }
 
-    private void IncreaseDifficulty()
-    {
-        obstacleSpeed += 1.0f;
-    }
 }
