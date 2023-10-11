@@ -25,7 +25,7 @@ public class MoveWorld : MonoBehaviour
         //all have this script attached
         if (gameManagerScript.isGameActive)
         {
-            speed = gameManagerScript.obstacleSpeed;
+            speed = gameManagerScript.obstacleSpeed + 5;
             transform.Translate(Vector3.back * Time.deltaTime * speed);
         }
 

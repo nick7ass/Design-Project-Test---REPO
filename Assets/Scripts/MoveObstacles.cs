@@ -21,8 +21,6 @@ public class MoveObstacles : MonoBehaviour
 
         obstacleRigidbody = GetComponent<Rigidbody>();
 
-        
-       
     }
 
     // Update is called once per frame
@@ -30,8 +28,14 @@ public class MoveObstacles : MonoBehaviour
     {
         if (gameManagerScript.isGameActive)
         {
-            Vector3 obstacleDirection = new Vector3(Random.Range(-3,3), 0, -20).normalized;
-            obstacleRigidbody.AddForce(obstacleDirection * obstacleSpeed, ForceMode.Impulse);
+            Vector3 obstacleDirection = new Vector3(Random.Range(-3, 3), 0, -20).normalized;
+
+            if (obstacleRigidbody.CompareTag("Obstacle"))
+            {
+                obstacleRigidbody.AddForce(obstacleDirection * obstacleSpeed, ForceMode.Impulse);
+            } else if (obstacleRigidbody.CompareTag("Powerup")) {
+                obstacleRigidbody.AddForce(obstacleDirection * obstacleSpeed/2);
+            }
         }
 
         if (obstacleRigidbody.position.z < 2)

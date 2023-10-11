@@ -19,7 +19,7 @@ public class GameManager : MonoBehaviour
     //Used to access the buttons and title in ui
     public GameObject titleScreen;
 
-    private MoveWorld moveWorldScript;
+    public GameObject powerup;
 
     public SpawnManager spawnManagerScript;
 
@@ -35,16 +35,18 @@ public class GameManager : MonoBehaviour
 
     //Variables used for InvokeRepeating call to increase difficulty as game goes on
     //and variable to hold the speed to be increased
-    private float repeatDelay = 3.0f;
+    private float repeatDelay = 4.0f;
     private float repeatRate = 3.0f;
     public float obstacleSpeed;
 
     public bool isGameActive;
 
+    public GameObject player;
+    public GameObject playerCorpse;
+
     // Start is called before the first frame update
     void Start()
     {
-        moveWorldScript = GameObject.Find("Environment").GetComponent<MoveWorld>();
         spawnManagerScript = spawnManagerScript.GetComponent<SpawnManager>();
 
         //Controls speed of obstacles (Both butchers and boulders etc, plus the world in move world script.
@@ -75,6 +77,8 @@ public class GameManager : MonoBehaviour
 
         //Starts function after delay and then repeat in accordance to repeatrate
         InvokeRepeating("IncreaseDifficulty", repeatDelay, repeatRate);
+
+        InvokeRepeating("SpawnPowerup", repeatDelay * repeatDelay, repeatRate * repeatRate);
 
     }
 
@@ -131,6 +135,12 @@ public class GameManager : MonoBehaviour
         obstacleSpeed += 1.0f;
     }
 
+    //Function to spawn Powerups
+    private void SpawnPowerup()
+    {
+        Instantiate(powerup, new Vector3(Random.Range(-spawnPosRangeX, spawnPosRangeX), spawnPosY/2, spawnPosZ), powerup.transform.rotation);
+    }
+
 
     //Used to get a random spawn position for obstacle
     private Vector3 getRandomSpawnPosition()
@@ -146,6 +156,11 @@ public class GameManager : MonoBehaviour
     //Triggered by player colliding with an obstacle.
     public void GameOver()
     {
+        //Moves the playerCorpse to players Xpos, then sets active to true and player gObj to false
+        playerCorpse.transform.Translate(player.transform.position.x, 0, 0);// playerCorpse.transform.position.y, playerCorpse.transform.position.z);
+        playerCorpse.SetActive(true);
+        player.SetActive(false);
+        
         //make try again button appear:
         restartButton.gameObject.SetActive(true);
         //make game over text appear:

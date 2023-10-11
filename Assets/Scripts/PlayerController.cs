@@ -17,6 +17,16 @@ public class PlayerController : MonoBehaviour
     //gets the Game manager script to a access the isGameActive variable
     private GameManager gameManagerScript;
 
+    //Variable for scale during powerup, variable for adjusting scale and variable for controlling whether powered up or not
+    Vector3 powerupScaleChange;
+    int scaleChange = 3;
+    bool hasActivePowerup;
+
+    //Variables for particle effects
+    public ParticleSystem redExplosionParticle;
+    public ParticleSystem greyExplosionParticle;
+    public ParticleSystem brownExplosionParticle;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -67,16 +77,45 @@ public class PlayerController : MonoBehaviour
 
         //}
         //else
-        if (collision.gameObject.CompareTag("Obstacle"))
+        if (collision.gameObject.CompareTag("Obstacle") && !hasActivePowerup)
         {
             Debug.Log("Game over!");
+            //Gör denna i gamemanager istället?gameObject.SetActive(false);
             gameManagerScript.GameOver();
             //Death animation, first is to trigger it (set it to true) and then which death animation
             //playerAnim.SetBool("Death_b", true);
             //playerAnim.SetInteger("DeathType_int", 1);
-            //explosionParticle.Play();
+            redExplosionParticle.Play();
             //dirtParticle.Stop();
             //playerAudio.PlayOneShot(crashSound, 1.0f);
         }
+        else if (collision.gameObject.CompareTag("Obstacle") && hasActivePowerup)
+        {
+            Debug.Log("Collision during powerup!");
+            brownExplosionParticle.Play();
+            Destroy(collision.gameObject);
+            //!!!!!lägg till particles här typ if name butcher bla else if name boulder obstacle etc
+        }
+    }
+
+    public void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("Powerup"))
+        {
+            hasActivePowerup = true;
+            Destroy(other.gameObject);
+            powerupScaleChange = transform.localScale * scaleChange;
+            transform.localScale = powerupScaleChange;
+            StartCoroutine(PowerupCountdownRoutine());
+        }
+    }
+
+    //A timer set to 8 seconds making it so that the powerup only stays active for 8 seconds then turns false
+    IEnumerator PowerupCountdownRoutine()
+    {
+        yield return new WaitForSeconds(8);
+        hasActivePowerup = false;
+        powerupScaleChange = transform.localScale / scaleChange;
+        transform.localScale = powerupScaleChange;
     }
 }
