@@ -43,11 +43,17 @@ public class GameManager : MonoBehaviour
 
     public GameObject player;
     public GameObject playerCorpse;
+    //Variable for particle effects
+    public ParticleSystem redExplosionParticle;
+
+    //public PlayerController playerControllerScript;
 
     // Start is called before the first frame update
     void Start()
     {
         spawnManagerScript = spawnManagerScript.GetComponent<SpawnManager>();
+
+        //playerControllerScript = playerControllerScript.GetComponent<PlayerController>();
 
         //Controls speed of obstacles (Both butchers and boulders etc, plus the world in move world script.
         obstacleSpeed = 8.0f;
@@ -156,9 +162,11 @@ public class GameManager : MonoBehaviour
     //Triggered by player colliding with an obstacle.
     public void GameOver()
     {
+        //playerControllerScript.redExplosionParticle.Play();
         //Moves the playerCorpse to players Xpos, then sets active to true and player gObj to false
         playerCorpse.transform.Translate(player.transform.position.x, 0, 0);// playerCorpse.transform.position.y, playerCorpse.transform.position.z);
         playerCorpse.SetActive(true);
+        redExplosionParticle.Play();
         player.SetActive(false);
         
         //make try again button appear:

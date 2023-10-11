@@ -22,8 +22,7 @@ public class PlayerController : MonoBehaviour
     int scaleChange = 3;
     bool hasActivePowerup;
 
-    //Variables for particle effects
-    public ParticleSystem redExplosionParticle;
+    //Variable for particle effects
     public ParticleSystem greyExplosionParticle;
 
     // Start is called before the first frame update
@@ -79,7 +78,7 @@ public class PlayerController : MonoBehaviour
         if (collision.gameObject.CompareTag("Obstacle") && !hasActivePowerup)
         {
             Debug.Log("Game over!");
-            redExplosionParticle.Play();
+            
             gameManagerScript.GameOver();
             //Death animation, first is to trigger it (set it to true) and then which death animation
             //playerAnim.SetBool("Death_b", true);
