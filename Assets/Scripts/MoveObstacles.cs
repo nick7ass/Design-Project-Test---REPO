@@ -34,7 +34,7 @@ public class MoveObstacles : MonoBehaviour
             {
                 obstacleRigidbody.AddForce(obstacleDirection * obstacleSpeed, ForceMode.Impulse);
             } else if (obstacleRigidbody.CompareTag("Powerup")) {
-                obstacleRigidbody.AddForce(obstacleDirection * obstacleSpeed/2);
+                obstacleRigidbody.AddForce(obstacleDirection * obstacleSpeed, ForceMode.Impulse);
             }
         }
 

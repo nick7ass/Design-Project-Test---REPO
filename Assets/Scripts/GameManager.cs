@@ -12,12 +12,15 @@ public class GameManager : MonoBehaviour
 
     //Var for score / Game over text (aka UI text to be or appear on screen.
     public TextMeshProUGUI scoreText;
+
     public TextMeshProUGUI gameOverText;
 
     public Button restartButton;
 
     //Used to access the buttons and title in ui
     public GameObject titleScreen;
+
+    public GameObject gameOverScreen;
 
     public GameObject powerup;
 
@@ -45,6 +48,7 @@ public class GameManager : MonoBehaviour
     public GameObject playerCorpse;
     //Variable for particle effects
     public ParticleSystem redExplosionParticle;
+    public ParticleSystem dirtSplatterParticle;
 
     //public PlayerController playerControllerScript;
 
@@ -71,6 +75,7 @@ public class GameManager : MonoBehaviour
 
         score = 0;
 
+        dirtSplatterParticle.Play();
 
         //Starts the spawn of butchers
         spawnManagerScript.StartSpawningButchers();
@@ -84,7 +89,7 @@ public class GameManager : MonoBehaviour
         //Starts function after delay and then repeat in accordance to repeatrate
         InvokeRepeating("IncreaseDifficulty", repeatDelay, repeatRate);
 
-        InvokeRepeating("SpawnPowerup", repeatDelay * repeatDelay, repeatRate * repeatRate);
+        InvokeRepeating("SpawnPowerup", repeatDelay, repeatRate * repeatDelay);
 
     }
 
@@ -98,8 +103,6 @@ public class GameManager : MonoBehaviour
             int index = Random.Range(0, obstacles.Count);
             Instantiate(obstacles[index], getRandomSpawnPosition(), obstacles[index].transform.rotation);
             UpdateSpawnRate();
-            //Ska testa ta bort denna och ist göra en func som ändrar alla svårigheter var 10 sec?
-            //moveWorldScript.speed += 0.5f;
 
             if (score>300)
             {
@@ -162,17 +165,18 @@ public class GameManager : MonoBehaviour
     //Triggered by player colliding with an obstacle.
     public void GameOver()
     {
-        //playerControllerScript.redExplosionParticle.Play();
-        //Moves the playerCorpse to players Xpos, then sets active to true and player gObj to false
-        playerCorpse.transform.Translate(player.transform.position.x, 0, 0);// playerCorpse.transform.position.y, playerCorpse.transform.position.z);
+        dirtSplatterParticle.Stop();
+        playerCorpse.transform.Translate(player.transform.position.x, 0, 0);
         playerCorpse.SetActive(true);
         redExplosionParticle.Play();
         player.SetActive(false);
-        
+
+        gameOverScreen.SetActive(true);
+
         //make try again button appear:
-        restartButton.gameObject.SetActive(true);
+        //restartButton.gameObject.SetActive(true);
         //make game over text appear:
-        gameOverText.gameObject.SetActive(true);
+        //gameOverText.gameObject.SetActive(true);
         //Used to maked diff functions etc not work.
         isGameActive = false;
 

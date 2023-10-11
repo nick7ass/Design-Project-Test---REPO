@@ -24,6 +24,7 @@ public class PlayerController : MonoBehaviour
 
     //Variable for particle effects
     public ParticleSystem greyExplosionParticle;
+    
 
     // Start is called before the first frame update
     void Start()
@@ -68,29 +69,16 @@ public class PlayerController : MonoBehaviour
     //To make it so when the player collides with obstacle, game over
     private void OnCollisionEnter(Collision collision)
     {
-        //if (collision.gameObject.CompareTag("Ground"))
-        //{
-        //    isOnGround = true;
-        //    dirtParticle.Play();
-
-        //}
-        //else
         if (collision.gameObject.CompareTag("Obstacle") && !hasActivePowerup)
         {
-            Debug.Log("Game over!");
-            
             gameManagerScript.GameOver();
-            //Death animation, first is to trigger it (set it to true) and then which death animation
-            //playerAnim.SetBool("Death_b", true);
-            //playerAnim.SetInteger("DeathType_int", 1);
             
-            //dirtParticle.Stop();
             //playerAudio.PlayOneShot(crashSound, 1.0f);
         }
         else if (collision.gameObject.CompareTag("Obstacle") && hasActivePowerup)
         {
             Debug.Log("Collision during powerup!");
-            //brownExplosionParticle.Play();
+            greyExplosionParticle.Play();
             Destroy(collision.gameObject);
             //!!!!!lägg till particles här typ if name butcher bla else if name boulder obstacle etc
         }
@@ -105,15 +93,15 @@ public class PlayerController : MonoBehaviour
             powerupScaleChange = transform.localScale * scaleChange;
             transform.localScale = powerupScaleChange;
             StartCoroutine(PowerupCountdownRoutine());
-        }
+        } 
     }
 
     //A timer set to 8 seconds making it so that the powerup only stays active for 8 seconds then turns false
     IEnumerator PowerupCountdownRoutine()
     {
         yield return new WaitForSeconds(8);
-        hasActivePowerup = false;
         powerupScaleChange = transform.localScale / scaleChange;
         transform.localScale = powerupScaleChange;
+        hasActivePowerup = false;
     }
 }
