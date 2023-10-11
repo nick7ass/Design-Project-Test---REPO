@@ -25,7 +25,6 @@ public class PlayerController : MonoBehaviour
     //Variables for particle effects
     public ParticleSystem redExplosionParticle;
     public ParticleSystem greyExplosionParticle;
-    public ParticleSystem brownExplosionParticle;
 
     // Start is called before the first frame update
     void Start()
@@ -80,19 +79,19 @@ public class PlayerController : MonoBehaviour
         if (collision.gameObject.CompareTag("Obstacle") && !hasActivePowerup)
         {
             Debug.Log("Game over!");
-            //Gör denna i gamemanager istället?gameObject.SetActive(false);
+            redExplosionParticle.Play();
             gameManagerScript.GameOver();
             //Death animation, first is to trigger it (set it to true) and then which death animation
             //playerAnim.SetBool("Death_b", true);
             //playerAnim.SetInteger("DeathType_int", 1);
-            redExplosionParticle.Play();
+            
             //dirtParticle.Stop();
             //playerAudio.PlayOneShot(crashSound, 1.0f);
         }
         else if (collision.gameObject.CompareTag("Obstacle") && hasActivePowerup)
         {
             Debug.Log("Collision during powerup!");
-            brownExplosionParticle.Play();
+            //brownExplosionParticle.Play();
             Destroy(collision.gameObject);
             //!!!!!lägg till particles här typ if name butcher bla else if name boulder obstacle etc
         }
