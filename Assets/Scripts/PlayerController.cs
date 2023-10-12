@@ -21,6 +21,7 @@ public class PlayerController : MonoBehaviour
     Vector3 powerupScaleChange;
     int scaleChange = 3;
     bool hasActivePowerup;
+    private Animator playerAnimator;
 
     //Variable for particle effects
     public ParticleSystem greyExplosionParticle;
@@ -31,6 +32,8 @@ public class PlayerController : MonoBehaviour
     {
         //Getting the game manager script from gameobject Game Manager
         gameManagerScript = GameObject.Find("Game Manager").GetComponent<GameManager>();
+        playerAnimator = GetComponent<Animator>();
+
     }
 
     // Update is called once per frame
@@ -92,6 +95,9 @@ public class PlayerController : MonoBehaviour
             Destroy(other.gameObject);
             powerupScaleChange = transform.localScale * scaleChange;
             transform.localScale = powerupScaleChange;
+            playerAnimator.SetFloat("Speed_f", 1.9f);
+            playerAnimator.SetBool("Eat_b", true);
+            
             StartCoroutine(PowerupCountdownRoutine());
         } 
     }
@@ -100,6 +106,8 @@ public class PlayerController : MonoBehaviour
     IEnumerator PowerupCountdownRoutine()
     {
         yield return new WaitForSeconds(8);
+        playerAnimator.SetFloat("Speed_f", 2.0f);
+        playerAnimator.SetBool("Eat_b", false);
         powerupScaleChange = transform.localScale / scaleChange;
         transform.localScale = powerupScaleChange;
         hasActivePowerup = false;

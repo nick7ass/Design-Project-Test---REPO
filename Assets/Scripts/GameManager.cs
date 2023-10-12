@@ -65,6 +65,9 @@ public class GameManager : MonoBehaviour
 
     public void StartGame()
     {
+        //Sets player to active
+        player.SetActive(true);
+
         //Variable to control if game is active
         isGameActive = true;
 
