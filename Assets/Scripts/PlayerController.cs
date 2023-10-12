@@ -80,10 +80,9 @@ public class PlayerController : MonoBehaviour
         }
         else if (collision.gameObject.CompareTag("Obstacle") && hasActivePowerup)
         {
-            Debug.Log("Collision during powerup!");
+            //Plays particle explosion when colliding with object and destroys object
             greyExplosionParticle.Play();
             Destroy(collision.gameObject);
-            //!!!!!lägg till particles här typ if name butcher bla else if name boulder obstacle etc
         }
     }
 

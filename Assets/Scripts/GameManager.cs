@@ -71,13 +71,13 @@ public class GameManager : MonoBehaviour
         //Variable to control if game is active
         isGameActive = true;
 
-        Debug.Log("I clicked on start");
-
         //Makes it so the start button and title text disappers when game starts
         titleScreen.SetActive(false);
 
+        //Sets starting score to 0
         score = 0;
 
+        //Starts particles
         dirtSplatterParticle.Play();
 
         //Starts the spawn of butchers
@@ -109,10 +109,12 @@ public class GameManager : MonoBehaviour
 
             if (score>300)
             {
+                index = Random.Range(0, obstacles.Count);
                 Instantiate(obstacles[index], getRandomSpawnPosition(), obstacles[index].transform.rotation);
             }
             if (score > 800)
             {
+                index = Random.Range(0, obstacles.Count);
                 Instantiate(obstacles[index], getRandomSpawnPosition(), obstacles[index].transform.rotation);
             }
         }
