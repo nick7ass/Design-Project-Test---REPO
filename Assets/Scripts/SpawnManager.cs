@@ -15,8 +15,7 @@ public class SpawnManager : MonoBehaviour
 
     //Variable for Audio
     private AudioSource butcherAudio;
-    public AudioClip butcherScreamOne;
-    public AudioClip butcherScreamTwo;
+    public AudioClip butcherScream;
 
 
     public void StartSpawningButchers()
@@ -30,9 +29,8 @@ public class SpawnManager : MonoBehaviour
     {
         if (gameManagerScript.isGameActive)
         {
-            butcherAudio.PlayOneShot(butcherScreamOne, 1.0f);
+            butcherAudio.PlayOneShot(butcherScream, 1.0f);
             Instantiate(butcher, getRandomSpawnPos(), butcher.transform.rotation);
-            //butcherAudio.PlayOneShot(butcherScreamTwo, 1.0f);
         }
     }
 

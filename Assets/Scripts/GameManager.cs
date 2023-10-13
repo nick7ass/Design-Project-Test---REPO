@@ -51,11 +51,17 @@ public class GameManager : MonoBehaviour
     public ParticleSystem redExplosionParticle;
     public ParticleSystem dirtSplatterParticle;
 
+    //Variable for Audio
+    private AudioSource gameOverAudio;
+    public AudioClip gameOverScream;
+
 
     // Start is called before the first frame update
     void Start()
     {
         spawnManagerScript = spawnManagerScript.GetComponent<SpawnManager>();
+
+        gameOverAudio = GetComponent<AudioSource>();
 
         //playerControllerScript = playerControllerScript.GetComponent<PlayerController>();
 
@@ -170,6 +176,7 @@ public class GameManager : MonoBehaviour
     //Triggered by player colliding with an obstacle.
     public void GameOver()
     {
+        gameOverAudio.PlayOneShot(gameOverScream, 1.0f);
         dirtSplatterParticle.Stop();
         playerCorpse.transform.Translate(player.transform.position.x, 0, 0);
         playerCorpse.SetActive(true);
@@ -178,11 +185,6 @@ public class GameManager : MonoBehaviour
 
         gameOverScreen.SetActive(true);
 
-        //make try again button appear:
-        //restartButton.gameObject.SetActive(true);
-        //make game over text appear:
-        //gameOverText.gameObject.SetActive(true);
-        //Used to maked diff functions etc not work.
         isGameActive = false;
 
     }
