@@ -13,9 +13,15 @@ public class SpawnManager : MonoBehaviour
     private float spawnPosRangeX = 20.0f;
     private GameManager gameManagerScript;
 
+    //Variable for Audio
+    private AudioSource butcherAudio;
+    public AudioClip butcherScreamOne;
+    public AudioClip butcherScreamTwo;
+
 
     public void StartSpawningButchers()
     {
+        butcherAudio = GetComponent<AudioSource>();
         gameManagerScript = GameObject.Find("Game Manager").GetComponent<GameManager>();
         InvokeRepeating("SpawnButcher", startDelay, repeatRate);
     }
@@ -24,7 +30,9 @@ public class SpawnManager : MonoBehaviour
     {
         if (gameManagerScript.isGameActive)
         {
+            butcherAudio.PlayOneShot(butcherScreamOne, 1.0f);
             Instantiate(butcher, getRandomSpawnPos(), butcher.transform.rotation);
+            //butcherAudio.PlayOneShot(butcherScreamTwo, 1.0f);
         }
     }
 

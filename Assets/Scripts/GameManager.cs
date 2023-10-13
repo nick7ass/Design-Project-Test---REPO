@@ -46,11 +46,11 @@ public class GameManager : MonoBehaviour
 
     public GameObject player;
     public GameObject playerCorpse;
+
     //Variable for particle effects
     public ParticleSystem redExplosionParticle;
     public ParticleSystem dirtSplatterParticle;
 
-    //public PlayerController playerControllerScript;
 
     // Start is called before the first frame update
     void Start()

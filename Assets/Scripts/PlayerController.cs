@@ -25,7 +25,11 @@ public class PlayerController : MonoBehaviour
 
     //Variable for particle effects
     public ParticleSystem greyExplosionParticle;
-    
+
+    //Variables for sound
+    public AudioClip crashSound;
+    private AudioSource playerAudio;
+
 
     // Start is called before the first frame update
     void Start()
@@ -33,6 +37,7 @@ public class PlayerController : MonoBehaviour
         //Getting the game manager script from gameobject Game Manager
         gameManagerScript = GameObject.Find("Game Manager").GetComponent<GameManager>();
         playerAnimator = GetComponent<Animator>();
+        playerAudio = GetComponent<AudioSource>();
 
     }
 
