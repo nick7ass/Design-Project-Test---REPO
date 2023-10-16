@@ -10,11 +10,9 @@ public class GameManager : MonoBehaviour
     //Declare/create list to place obstacle prefabs in for use in game.
     public List<GameObject> obstacles;
 
-    //Var for score / Game over text (aka UI text to be or appear on screen.
+    //Variable for score text & Game over text (aka UI text to be or appear on screen
     public TextMeshProUGUI scoreText;
-
     public TextMeshProUGUI gameOverText;
-
     public Button restartButton;
 
     //Used to access the buttons and title in ui
