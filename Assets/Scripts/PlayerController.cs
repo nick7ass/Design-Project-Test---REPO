@@ -27,8 +27,8 @@ public class PlayerController : MonoBehaviour
     public ParticleSystem greyExplosionParticle;
 
     //Variables for sound
-    public AudioClip crashSound;
-    private AudioSource playerAudio;
+    //public AudioClip crashSound;
+    //private AudioSource playerAudio;
 
 
     // Start is called before the first frame update
@@ -37,7 +37,7 @@ public class PlayerController : MonoBehaviour
         //Getting the game manager script from gameobject Game Manager
         gameManagerScript = GameObject.Find("Game Manager").GetComponent<GameManager>();
         playerAnimator = GetComponent<Animator>();
-        playerAudio = GetComponent<AudioSource>();
+        //playerAudio = GetComponent<AudioSource>();
 
     }
 
@@ -62,16 +62,6 @@ public class PlayerController : MonoBehaviour
         {
             transform.position = new Vector3(outOfRangeX, transform.position.y, transform.position.z);
         }
-
-
-
-
-        //Make noise when pressing space
-        //if (Input.GetKeyDown(KeyCode.Space) && !isGameActive)
-        //{
-        //Ist för denna så använd ljud
-        //Instantiate(cookiePrefab, transform.position, transform.rotation);
-        //}
     }
 
     //To make it so when the player collides with obstacle, game over
