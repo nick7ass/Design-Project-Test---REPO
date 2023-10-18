@@ -28,10 +28,5 @@ public class MoveWorld : MonoBehaviour
             transform.Translate(Vector3.back * Time.deltaTime * speed);
         }
 
-        //Destroys obstacles that is out of screen
-        //if (transform.position.z < outOfBound && gameObject.CompareTag("Obstacle"))
-        //{
-        //    Destroy(gameObject);
-        //}
     }
 }
